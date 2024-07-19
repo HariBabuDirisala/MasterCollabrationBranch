@@ -1,0 +1,41 @@
+{
+	"name": "TRG_QS_Daily",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_SQL_ADSL",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"PL_Tablename_Parameter": "Emp",
+					"PL_Path": "Emp\\Landed",
+					"PL_Filename": "Emp"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Week",
+				"interval": 1,
+				"startTime": "2024-07-06T05:48:00",
+				"timeZone": "New Zealand Standard Time",
+				"schedule": {
+					"minutes": [
+						30
+					],
+					"hours": [
+						9
+					],
+					"weekDays": [
+						"Monday",
+						"Friday"
+					]
+				}
+			}
+		}
+	}
+}

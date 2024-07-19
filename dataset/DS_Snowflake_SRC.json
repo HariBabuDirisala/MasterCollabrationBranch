@@ -1,0 +1,30 @@
+{
+	"name": "DS_Snowflake_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Snowflake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [
+			{
+				"name": "PRODUCTID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "PRODUCTNAME",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "TB_PRODUCT",
+			"table": "PRODUCT1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

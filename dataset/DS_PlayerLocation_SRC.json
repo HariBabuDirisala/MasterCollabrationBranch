@@ -1,0 +1,34 @@
+{
+	"name": "DS_PlayerLocation_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Playrerlocation_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "PlayerLocation.csv",
+				"folderPath": "Playersdetails/Landed",
+				"container": "quickstart"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Playerid",
+				"type": "String"
+			},
+			{
+				"name": "PlayerLocation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

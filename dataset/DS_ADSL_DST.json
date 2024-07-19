@@ -1,0 +1,60 @@
+{
+	"name": "DS_ADSL_DST",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS_DST",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"PR_Path": {
+				"type": "string"
+			},
+			"PR_Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().PR_Filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().PR_Path",
+					"type": "Expression"
+				},
+				"fileSystem": "quickstart"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EmiID",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

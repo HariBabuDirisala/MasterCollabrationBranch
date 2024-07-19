@@ -1,0 +1,42 @@
+{
+	"name": "DS_Playerslist_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Playerdetails_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "CricketPlayerDetails.csv",
+				"folderPath": "Playersdetails/Landed",
+				"container": "quickstart"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Match",
+				"type": "String"
+			},
+			{
+				"name": "Playerid",
+				"type": "String"
+			},
+			{
+				"name": "Playername",
+				"type": "String"
+			},
+			{
+				"name": "playerscore",
+				"type": "Int32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

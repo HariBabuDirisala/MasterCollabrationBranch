@@ -1,0 +1,24 @@
+{
+	"name": "DS_Playerlist_DST",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Playerdetails_AzureBlobStorage_DST",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Playersdetails/Processed",
+				"container": "quickstart"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

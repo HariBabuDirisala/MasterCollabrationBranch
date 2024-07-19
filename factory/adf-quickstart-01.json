@@ -1,0 +1,9 @@
+{
+	"name": "adf-quickstart-01",
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "266a6e29-1bcf-402c-b075-52f4decd67c9",
+		"tenantId": "f6b3cec6-a862-4a40-9ab4-00d6e11e6f0f"
+	}
+}

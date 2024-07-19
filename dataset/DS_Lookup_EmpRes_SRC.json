@@ -1,0 +1,17 @@
+{
+	"name": "DS_Lookup_EmpRes_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EmpResignation"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

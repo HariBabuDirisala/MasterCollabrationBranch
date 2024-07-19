@@ -1,0 +1,78 @@
+{
+	"name": "DFPlayersDetails",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_Playerslist_SRC",
+						"type": "DatasetReference"
+					},
+					"name": "DFPlayerDetailsSRC1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_PlayerLocation_SRC",
+						"type": "DatasetReference"
+					},
+					"name": "DFPlayerLocationSRC2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Playerlist_DST",
+						"type": "DatasetReference"
+					},
+					"name": "DFPlayersDetailsFileDST"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DFJointPlayerDetails"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     DF_PR_CricketScroreFileName as string",
+				"}",
+				"source(output(",
+				"          Match as string,",
+				"          Playerid as string,",
+				"          Playername as string,",
+				"          playerscore as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DFPlayerDetailsSRC1",
+				"source(output(",
+				"          Playerid as string,",
+				"          PlayerLocation as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DFPlayerLocationSRC2",
+				"DFPlayerDetailsSRC1, DFPlayerLocationSRC2 join(DFPlayerDetailsSRC1@Playerid == DFPlayerLocationSRC2@Playerid,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> DFJointPlayerDetails",
+				"DFJointPlayerDetails aggregate(groupBy(DFPlayerDetailsSRC1@Playerid,",
+				"          Playername,",
+				"          PlayerLocation),",
+				"     playerscore = sum(playerscore),",
+				"          Match = count(Match)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:[($DF_PR_CricketScroreFileName)],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> DFPlayersDetailsFileDST"
+			]
+		}
+	}
+}

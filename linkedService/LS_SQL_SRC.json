@@ -1,0 +1,21 @@
+{
+	"name": "LS_SQL_SRC",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "quickstart-01.database.windows.net",
+			"database": "quckstartdb",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "admimqs",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYTc3YzRkMC1lMDY4LTRmZTMtOWQxNS1mMmRhNjgwOTMzODQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "ir-excelonpremises",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"name": "LS_AzureBlobStorage_Des",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"sasUri": "https://dbstoragequickstart02.blob.core.windows.net/",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhMTI3MGQ4Mi1jNDdhLTQyZTItYjNlNS01Njk0YmRjNjgyMzEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "ir-excelonpremises",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,118 @@
+{
+	"name": "PL_SQL_ADSL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ProductId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ProductId",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductName",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ProductName",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_SQL_SRC",
+						"type": "DatasetReference",
+						"parameters": {
+							"Tablename": {
+								"value": "@pipeline().parameters.PL_Tablename_Parameter",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADSL_DST",
+						"type": "DatasetReference",
+						"parameters": {
+							"PR_Path": {
+								"value": "@concat(pipeline().parameters.PL_Tablename_Parameter,'\\','Landed')",
+								"type": "Expression"
+							},
+							"PR_Filename": {
+								"value": "@concat(pipeline().parameters.PL_Tablename_Parameter,'_',FormatDateTime(utcNow(),'yyyyMMdd HHmmss'))",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"PL_Tablename_Parameter": {
+				"type": "string",
+				"defaultValue": "Emp"
+			},
+			"PL_Path": {
+				"type": "string",
+				"defaultValue": "Emp\\Landed"
+			},
+			"PL_Filename": {
+				"type": "string",
+				"defaultValue": "Emp"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-07-06T05:55:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

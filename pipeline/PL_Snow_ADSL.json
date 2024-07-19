@@ -1,0 +1,66 @@
+{
+	"name": "PL_Snow_ADSL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_Snow_ADSL",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SnowflakeSource",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Snowflake_SRC",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_AzureBlob_DST",
+						"type": "DatasetReference",
+						"parameters": {
+							"PR_Filename_DST": {
+								"value": "@concat(pipeline().parameters.PR_PL_Filename, '_', FormatDateTime(utcNow(),'yyyyMMdd HHmmss'))\n\n",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"PR_PL_Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-07-07T08:10:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
